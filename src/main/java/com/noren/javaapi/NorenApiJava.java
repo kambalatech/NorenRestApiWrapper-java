@@ -208,6 +208,18 @@ public class NorenApiJava {
         jsonObject.put("remarks" ,remarks);
         if(null != amo)
             jsonObject.put("amo"     ,amo);
+
+        //if cover order or high leverage order
+        if (bookloss_price != null)
+            jsonObject.put("blprc"  ,Double.toString(bookloss_price));
+
+        //trailing price
+        if (trail_price != null)
+            jsonObject.put("trailprc"  ,Double.toString(trail_price));
+
+        //book profit of bracket order
+        if (bookprofit_price != null)
+            jsonObject.put("bpprc"  ,Double.toString(bookprofit_price));
                 
         String response = _api.post(url, _key, jsonObject);
         JSONObject jsonResp = new JSONObject(response);
@@ -238,7 +250,7 @@ public class NorenApiJava {
             
         }
         //if cover order or high leverage order
-        if (newtrigger_price != null)
+        if (bookloss_price != null)
             jsonObject.put("blprc"  ,Double.toString(bookloss_price));
         
         //trailing price
